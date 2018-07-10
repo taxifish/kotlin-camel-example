@@ -27,6 +27,10 @@ class SimpleRouter : RouteBuilder() {
                 .log(DEBUG, log, "Received message on test-output")
                 .bean(simpleService, "simpleOutputFunction")
                 .to("log:out")
+
+        from("web3j://http://127.0.0.1:8545?operation=ETH_BLOCK_HASH_OBSERVABLE")
+                .to("log:out")
+
     }
 
 

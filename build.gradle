@@ -4,8 +4,8 @@ version '1.0-SNAPSHOT'
 buildscript {
     ext {
         kotlin_version = '1.1.4-2'
-        spring_boot_version = '1.5.6.RELEASE'
-        camel_version = '2.19.2'
+        spring_boot_version = '2.0.3.RELEASE'
+        camel_version = '2.22.0'
     }
 
     repositories {
@@ -41,6 +41,7 @@ dependencies {
 
     compile "org.apache.camel:camel-spring-boot:$camel_version"
     compile "org.apache.camel:camel-test-spring:$camel_version"
+    compile "org.apache.camel:camel-web3j:$camel_version"
 
     compile 'io.github.microutils:kotlin-logging:1.4.6'
 
