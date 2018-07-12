@@ -5,6 +5,7 @@ import org.apache.camel.builder.RouteBuilder
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.apache.camel.LoggingLevel.*
+import org.apache.camel.model.dataformat.JsonLibrary
 
 @Component
 class SimpleRouter : RouteBuilder() {
@@ -28,8 +29,10 @@ class SimpleRouter : RouteBuilder() {
                 .bean(simpleService, "simpleOutputFunction")
                 .to("log:out")
 
-        from("web3j://http://127.0.0.1:8545?operation=ETH_BLOCK_HASH_OBSERVABLE")
-                .to("log:out")
+        from("web3j://http://104.40.193.0:8545?operation=BLOCK_OBSERVABLE&fullTransactionObjects=true")
+                .marshal().json(JsonLibrary.Gson)
+                .convertBodyTo(String::class.java)
+                .to("mongodb:mongoLocal?database=rinkeby&collection=blocks&operation=insert")
 
     }
 
